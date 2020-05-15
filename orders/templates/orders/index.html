@@ -1,0 +1,16 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+CS50's PIZZA
+{% endblock %}
+
+{% block body %}
+    <main>
+        {% if messages %}
+            {% for message in messages %}
+            <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:3000});</script>
+            {% endfor %}
+        {% endif %}
+        {% include 'orders/includes/menu.html' %}
+    </main>    
+{% endblock %}

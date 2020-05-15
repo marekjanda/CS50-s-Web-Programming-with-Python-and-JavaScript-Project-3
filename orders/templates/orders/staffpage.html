@@ -1,0 +1,86 @@
+{% extends 'orders/base.html' %}
+
+{% block body %}
+    <div class="card card-body staff">
+        {% if staff_authenticated %}
+            <article>
+                <section class="staffview">
+                    <h4>Placed orders:</h4>
+                    <div class="items">   
+                        <ul>
+                            {% if placed_orders %}
+                                {% for order in placed_orders %}
+                                    <li><a href="{% url 'order_process' order.id %}">{{ order.placed }}, {{ order.customer }}, ${{ order.total_price|floatformat:2 }}</a></li>
+                                {% endfor %}
+                            {% else %}
+                                There are no placed orders!
+                            {% endif %}
+                        </ul>
+                    </div>
+                </section>
+                <hr>
+                <section class="staffview">
+                    <h4>Preparing orders:</h4>
+                    <div class="items">     
+                        <ul>
+                            {% if preparing_orders %}
+                                {% for order in preparing_orders %}
+                                    <li><a href="{% url 'order_process' order.id %}">{{ order.placed }}, {{ order.customer }}, ${{ order.total_price|floatformat:2 }}</a></li>
+                                {% endfor %}
+                            {% else %}
+                                No orders are being prepared!
+                            {% endif %}
+                        </ul>
+                    </div>
+                </section>
+                <hr>
+                <section class="staffview">
+                    <h4>Cooking orders:</h4>
+                    <div class="items">     
+                        <ul>
+                            {% if cooking_orders %}
+                                {% for order in cooking_orders %}
+                                    <li><a href="{% url 'order_process' order.id %}">{{ order.placed }}, {{ order.customer }}, ${{ order.total_price|floatformat:2 }}</a></li>
+                                {% endfor %}
+                            {% else %}
+                                No orders are being cooked!
+                            {% endif %}
+                        </ul>
+                    </div>
+                </section>
+                <hr>
+                <section class="staffview">
+                    <h4>Finished orders:</h4>
+                    <div class="items">    
+                        <ul>
+                            {% if finished_orders %}
+                                {% for order in finished_orders %}
+                                    <li><a href="{% url 'order_process' order.id %}">{{ order.placed }}, {{ order.customer }}, ${{ order.total_price|floatformat:2 }}</a></li>
+                                {% endfor %}
+                            {% else %}
+                                There are no finished orders!
+                            {% endif %}
+                        </ul>
+                    </div>
+                </section>
+                <hr>
+                <section class="staffview">
+                    <h4>Delivered orders:</h4>
+                    <div class="items">     
+                        <ul>
+                            {% if delivered_orders %}
+                                {% for order in delivered_orders %}
+                                    <li><a href="{% url 'order_process' order.id %}">{{ order.placed }}, {{ order.customer }}, ${{ order.total_price|floatformat:2 }}</a></li>
+                                {% endfor %}
+                            {% else %}
+                                There are no finished orders!
+                            {% endif %}
+                        </ul>
+                    </div>
+                </section>
+            </article>
+        {% else %}
+            Sorry, you are not authorized to view this page!
+        {% endif %}
+    </div>
+{% endblock %}

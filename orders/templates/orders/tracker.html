@@ -1,0 +1,29 @@
+{% extends 'orders/base.html' %}
+
+{% block body %}
+    <div class="card card-body shoppingcart">
+        {% if items == None %}
+            <p>
+                <h2>You haven't placed any order. Please order <a href="{% url 'order' %}">here.</a> Or place an order in your <a href="{% url 'shopping_cart' %}">shoppingcart.</a></a></h2>
+            </p>
+        {% else %}
+            <h6>{{ customer }}</h6>
+            <table>
+                <tr>
+                    <td><h6>Item</h6></td>
+                    <td><h6>Price</h6></td>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>${{ item.price|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr>
+            <h3>Total: <strong>${{ price|floatformat:2 }}</strong></h3>
+            <br>
+            <h3>Order Status: <span id="status"><strong>{{ status }}</strong></span></h3>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'orders/base.html' %}
+
+{% block body %}
+    {% if items == None %}
+        <p>
+            <h2>Your shopping cart is empty please add items to your order <a href="{% url 'order' %}">here.</a></h2>
+        </p>
+    {% else %}
+    <div class="card card-body shoppingcart">
+        <table>
+            <tr>
+                <td><h6>Item</h6></td>
+                <td><h6>Price</h6></td>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item }}</td>
+                <td>${{ item.price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <h3>Total: <strong>${{ price|floatformat:2 }}</strong></h3>
+        <p class="orderconfirmation">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="submit" name="place" value="Place Order" class="btn btn-primary">
+            </form>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="submit" name="cancel" value="Cancel Order" class="btn btn-primary" style="background-color: darkred;">
+            </form>
+        </p>
+    </div>
+    {% endif %}
+{% endblock %}

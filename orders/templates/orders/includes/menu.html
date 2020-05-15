@@ -1,0 +1,117 @@
+<section class="menu">
+    <p>
+        <div class="card card-body">
+            <header>
+                <h2>Our Menu:</h2>
+            </header>
+            <h5>Pizza</h5>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Toppings</th>
+                    <th>Small</th>
+                    <th>Large</th>
+                </tr>
+                {% for pizza in pizzas %}
+                    <tr>
+                        <td>{{ pizza.pizza_type }}</td>
+                        {% if pizza.pizza_type == "Regular" %}
+                            {% if pizza.toppings_option == 0 %}
+                                <td>Cheese</td>
+                            {% elif pizza.toppings_option == 1  %}
+                                <td>{{ pizza.toppings_option }} Topping</td>
+                            {% elif pizza.toppings_option == 5 %}
+                                <td>Special</td>
+                            {% else %}
+                                <td>{{ pizza.toppings_option }} Toppings</td>
+                            {% endif %}
+                        {% else %}
+                            {% if pizza.toppings_option == 0 %}
+                                <td>Cheese</td>
+                            {% elif pizza.toppings_option == 1  %}
+                                <td>{{ pizza.toppings_option }} Item</td>
+                            {% elif pizza.toppings_option == 5 %}
+                                <td>Special</td>
+                            {% else %}
+                                <td>{{ pizza.toppings_option }} Items</td>
+                            {% endif %}
+                        {% endif %}                        
+                        <td>${{ pizza.price_small|floatformat:2 }}</td>
+                        <td>${{ pizza.price_large|floatformat:2 }}</td>
+                    </tr>                                
+                {% endfor %}
+            </table>
+            <hr>
+            <table>
+                <tr>
+                    <th><h5>Toppings</h5></th>
+                </tr>
+                {% for topping in toppings %}
+                    <tr>
+                        <td>{{ topping.name }}</td>
+                    </tr>                                
+                {% endfor %}
+            </table>
+            <hr>
+            <h5>Subs</h5>
+            <table>
+                <tr>
+                    <th>Sub</th>
+                    <th>Small</th>
+                    <th>Large</th>
+                </tr>
+                {% for sub in subs %}
+                    <tr>
+                        <td>{{ sub.name }}</td>
+                        <td>${{ sub.price_small|floatformat:2 }}</td>
+                        <td>${{ sub.price_large|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <hr>
+            <h5>Pasta</h5>
+            <table>
+                <tr>
+                    <th>Pasta</th>
+                    <th>Price</th>
+                </tr>
+                {% for pasta in pastas %}
+                    <tr>
+                        <td>{{ pasta }}</td>
+                        <td>${{ pasta.price|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <hr>
+            <h5>Salads</h5>
+            <table>
+                <tr>
+                    <th>Salad</th>
+                    <th>Price</th>
+                </tr>
+                {% for salad in salads %}
+                    <tr>
+                        <td>{{ salad.name }}</td>
+                        <td>${{ salad.price|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <hr>
+            <h5>Platters</h5>
+            <table>
+                <tr>
+                    <th>Platter</th>
+                    <th>Small</th>
+                    <th>Large</th>
+                </tr>
+                {% for platter in platters %}
+                    <tr>
+                        <td>{{ platter.name }}</td>
+                        <td>${{ platter.price_small|floatformat:2 }}</td>
+                        <td>${{ platter.price_large|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </p>
+</section>

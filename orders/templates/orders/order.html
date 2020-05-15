@@ -1,0 +1,108 @@
+{% extends 'orders/base.html' %}
+
+{% block script %}
+    <script src="static/orders/jquery-3.4.1.js"></script>
+    <script src="static/orders/order_v2.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <section class="ordering">
+        <div class="card card-body">
+            
+                <!-- Regular Pizzas -->
+                <h3>Pizza</h3>
+                <hr>                       
+                <table>
+                    <tr><td colspan="4"><h4>Regular</h4></td></tr>
+                    <th>                    
+                        <td>Toppings</td>
+                        <td>Small</td>
+                        <td>Large</td>
+                    </th>
+                    {% for pizza in pizzas %}
+                        {% if pizza.pizza_type == 'Regular' %}
+                            <tr>
+                                {% if pizza.toppings_option == 0 %}
+                                    <td class="top_option">Cheese</td>
+                                {% elif pizza.toppings_option == 1 %}
+                                    <td class="top_option">{{ pizza.toppings_option }} Topping</td>
+                                {% elif pizza.toppings_option == 5 %}
+                                    <td class="top_option">Special</td>
+                                {% else %}
+                                    <td class="top_option">{{ pizza.toppings_option }} Toppings</td>
+                                {% endif %}
+                                {% include 'orders/includes/pizzaselection.html' %}
+                                <td><button data-meal="pizza" data-pizzatype="{{ pizza.pizza_type }}" data-option="{{ pizza.toppings_option }}" data-size="small" data-price="{{ pizza.price_small }}" class="addbutton btn btn-primary">${{ pizza.price_small|floatformat:2 }} + ADD</button></td>
+                                <td><button data-meal="pizza" data-pizzatype="{{ pizza.pizza_type }}" data-option="{{ pizza.toppings_option }}" data-size="large" data-price="{{ pizza.price_large }}" class="addbutton btn btn-primary">${{ pizza.price_large|floatformat:2 }} + ADD</button></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    <tr><td colspan="4"><h4>Sicilian</h4></td></tr>
+                    {% for pizza in pizzas %}
+                        {% if pizza.pizza_type == 'Sicilian' %}
+                            <tr>
+                                {% if pizza.toppings_option == 0 %}
+                                    <td>Cheese</td>
+                                {% elif pizza.toppings_option == 1 %}
+                                    <td>{{ pizza.toppings_option }} Item</td>
+                                {% elif pizza.toppings_option == 5 %}
+                                    <td>Special</td>
+                                {% else %}
+                                    <td>{{ pizza.toppings_option }} Items</td>
+                                {% endif %}
+                                {% include 'orders/includes/pizzaselection.html' %}
+                                <td><button data-meal="pizza" data-pizzatype="{{ pizza.pizza_type }}" data-option="{{ pizza.toppings_option }}" data-size="small" data-price="{{ pizza.price_small }}" class="addbutton btn btn-primary">${{ pizza.price_small|floatformat:2 }} + ADD</button></td>
+                                <td><button data-meal="pizza" data-pizzatype="{{ pizza.pizza_type }}" data-option="{{ pizza.toppings_option }}" data-size="large" data-price="{{ pizza.price_large }}" class="addbutton btn btn-primary">${{ pizza.price_large|floatformat:2 }} + ADD</button></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+                <hr>
+
+                <h3>Other</h3>
+                <hr>
+                <table class="addtoorder">
+                    <tr><td colspan="4"><h4>Subs</h4></td></tr>
+                    <th>       
+                        <td>Small</td></td>
+                        <td>Large</td>
+                    </th>
+                    {% for sub in subs %}
+                        <tr>
+                            <td>{{ sub.name }}</td>
+                            <td><button data-meal="sub" data-sub="{{ sub.name }}" data-size="small"  data-price="{{ sub.price_small }}" class="addbutton btn btn-primary">{{ sub.price_small|floatformat:2 }} + ADD</button></td>
+                            <td><button data-meal="sub" data-sub="{{ sub.name }}" data-size="large"  data-price="{{ sub.price_large }}" class="addbutton btn btn-primary">{{ sub.price_large|floatformat:2 }} + ADD</button></td>
+                        </tr>
+                    {% endfor %}
+                    <tr><td colspan="4"><h4>Pasta</h4></td></tr>
+                    {% for pasta in pastas %}
+                        <tr>
+                            <td>{{ pasta }}</td>
+                            <td><button data-meal="pasta" data-pasta="{{ pasta }}" data-price="{{ pasta.price }}" class="addbutton btn btn-primary">{{ pasta.price|floatformat:2 }} + ADD</button></td>
+                        </tr>
+                    {% endfor %}
+                    <tr><td colspan="4"><h4>Salads</h4></td></tr>
+                    {% for salad in salads %}
+                        <tr>
+                            <td>{{ salad }}</td>
+                            <td><button data-meal="salad" data-salad="{{ salad }}" data-price="{{ salad.price }}" class="addbutton btn btn-primary">{{ salad.price|floatformat:2 }}</button></td>
+                        </tr>                    
+                    {% endfor %}
+                    <tr><td colspan="4"><h4>Platters</h4></td></tr>
+                    <th>
+                        <td>Small</td>
+                        <td>Large</td>
+                    </th>
+                    {% for platter in platters %}
+                        <tr>
+                            <td>{{ platter }}</td>
+                            <td><button data-meal="platter" data-platter="{{ platter }}" data-size="small" data-price="{{ platter.price_small }}" class="addbutton btn btn-primary">{{ platter.price_small|floatformat:2 }} + ADD</button></td>
+                            <td><button data-meal="platter" data-platter="{{ platter }}" data-size="large" data-price="{{ platter.price_large }}" class="addbutton btn btn-primary">{{ platter.price_large|floatformat:2 }} + ADD</button></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <hr>
+                        
+        </div>    
+    </section> 
+{% endblock %}
